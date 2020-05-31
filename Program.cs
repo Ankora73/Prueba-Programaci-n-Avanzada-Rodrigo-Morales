@@ -18,7 +18,21 @@ namespace Prueba_Programación_Avanzada_Rodrigo_Morales
 
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            int respuesta = 0;
+            do
+            {
+                Console.WriteLine("Bienvenido al Registro de venta de Automóviles de FranceCar!");
+                Console.WriteLine("############################################################################");
+                Console.WriteLine("Por Favor ingrese que desea hacer, seleccionando el número correspondiente: ");
+                Console.WriteLine("1) Agregar un nuevo Auto");
+                Console.WriteLine("2) Mostrar todos los Autos");
+                Console.WriteLine("4) Mostrar cantidad Autos Costosos");
+                Console.WriteLine("5) Elimiar auto");
+                Console.WriteLine("6) Salir de la aplicación");
+                Console.WriteLine("############################################################################");
+                respuesta = int.Parse(Console.ReadLine());
+            } while (respuesta < 0 && respuesta > 6);
+
         }
     }
 }
