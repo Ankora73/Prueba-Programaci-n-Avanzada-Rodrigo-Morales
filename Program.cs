@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Prueba_Programación_Avanzada_Rodrigo_Morales
 {
@@ -82,6 +83,8 @@ namespace Prueba_Programación_Avanzada_Rodrigo_Morales
                     Console.Clear();
                     eliminarAuto();
                     break;
+                case "5": Environment.Exit(0);
+                    break;
                 default:Console.WriteLine("Debe ingresar una opción valida, presione una tecla para continuar");
                     Console.ReadLine();
                     respuesta = "0";
@@ -103,6 +106,7 @@ namespace Prueba_Programación_Avanzada_Rodrigo_Morales
             Console.WriteLine("###########################################################"+"\n");
             do
             {
+                Console.Clear();
                 Console.WriteLine("#####################################################");
                 Console.WriteLine("             Ingrese número de Chasis");
                 Console.WriteLine("#####################################################");
@@ -174,7 +178,7 @@ namespace Prueba_Programación_Avanzada_Rodrigo_Morales
                         Console.WriteLine("#####################################################");
                         try
                         {
-                            traccion = int.Parse(Console.ReadLine());
+                            traccion = int.Parse(Console.ReadLine().Trim());
                             if (traccion==2)
                             {
                                 auto.Traccion = traccion;
@@ -193,6 +197,7 @@ namespace Prueba_Programación_Avanzada_Rodrigo_Morales
                         {
                             Console.WriteLine("ha ingresado un valor incorrecto, presione una tecla para continuar");
                             Console.ReadLine();
+                            traccion = 0;
                         }
                         
                     } while (traccion==0);
@@ -211,13 +216,13 @@ namespace Prueba_Programación_Avanzada_Rodrigo_Morales
                         switch (tipo.ToUpper())
                         {
                             case "A": 
-                                auto.VersionSedan = tipo;
+                                auto.VersionSedan = tipo.ToUpper().Trim();
                                 break;
                             case "B":
-                                auto.VersionSedan = tipo;
+                                auto.VersionSedan = tipo.ToUpper().Trim();
                                 break;
                             case "C":
-                                auto.VersionSedan = tipo;
+                                auto.VersionSedan = tipo.ToUpper().Trim();
                                 break;
                             default:
                                 Console.WriteLine("Debe ingresar una opción valida, presione una tecla para continuar");
@@ -237,12 +242,43 @@ namespace Prueba_Programación_Avanzada_Rodrigo_Morales
                     lane = "";
                 }
                 Console.Clear();
-            } while (lane.ToUpper()!="A"&&lane.ToUpper()!="B");    
+            } while (lane.ToUpper()!="A"&&lane.ToUpper()!="B");
+            Console.Clear();
+            listadoAutos.Add(auto);
+            Console.WriteLine("Se ha agregado un nuevo auto satisfactoriamente!");
+            Console.WriteLine("Presione una tecla para continuar");
+            Console.ReadLine();
+            Console.Clear();
+            menu();
 
         }
         private static void mostrarTodos()
         {
+            Console.WriteLine("###############################################");
+            Console.WriteLine("############ LISTA TOTAL DE AUTOS #############");
+            Console.WriteLine("###############################################\n");
+            for (int i = 0; i < listadoAutos.Count(); i++)
+            {
+                Console.WriteLine("###############################################");
+                Console.WriteLine("Número de Chasis:    " + listadoAutos[i].NumChasis);
+                Console.WriteLine("Cilindrada:          " + listadoAutos[i].Cilindrada);
+                Console.WriteLine("Precio:              " + listadoAutos[i].Precio);
+                Console.WriteLine("Tipo de Auto:        " + listadoAutos[i].TipoAuto);
+                if (listadoAutos[i].TipoAuto.ToUpper().Equals("SIV"))
+                {
+                    Console.WriteLine("Tracción:           " + listadoAutos[i].Traccion);
+                }
+                if (listadoAutos[i].TipoAuto.ToUpper().Equals("SEDÁN"))
+                {
+                    Console.WriteLine("Versión Sedán:       " + listadoAutos[i].VersionSedan);
+                }
+                Console.WriteLine("###############################################\n");
 
+            }
+            Console.WriteLine("\n\n Presione una tecla para continuar...");
+            Console.ReadLine();
+            Console.Clear();
+            menu();
         }
         private static void mostrarCantidadAutosCostosos()
         {
@@ -252,6 +288,7 @@ namespace Prueba_Programación_Avanzada_Rodrigo_Morales
         {
 
         }
+        
     }
 }
 /*
