@@ -113,7 +113,22 @@ namespace Prueba_Programación_Avanzada_Rodrigo_Morales
                 try
                 {
                     numChasis = int.Parse(Console.ReadLine());
-                    auto.NumChasis = numChasis;
+
+                    for (int i = 0; i < listadoAutos.Count(); i++)
+                    {
+                        if (numChasis.Equals(listadoAutos[i].NumChasis))
+                        {
+                            Console.WriteLine("Ya existe un registro con ese número de chasis");
+                            Console.WriteLine("Presione una tecla para continuar...");
+                            Console.ReadLine();
+                            break;
+                        }
+                        else
+                        {
+                            auto.NumChasis = numChasis;
+                        }
+
+                    }
                 }
                 catch (Exception)
                 {
