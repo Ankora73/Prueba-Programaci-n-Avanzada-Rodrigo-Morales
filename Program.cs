@@ -101,7 +101,7 @@ namespace Prueba_Programación_Avanzada_Rodrigo_Morales
             int numChasis = 0;
             double cilindrada = 0;
             double precio = 0;
-            Boolean exist = true;
+            Boolean exist=true;
             Console.WriteLine("###########################################################");
             Console.WriteLine("                   INGRESO DE AUTOMÓVIL                    ");
             Console.WriteLine("###########################################################"+"\n");
@@ -113,20 +113,21 @@ namespace Prueba_Programación_Avanzada_Rodrigo_Morales
                 Console.WriteLine("#####################################################");
                 try
                 {
+                    exist = false;
                     numChasis = int.Parse(Console.ReadLine());
                     for (int i = 0; i < listadoAutos.Count(); i++)
                     {
                         if (listadoAutos[i].NumChasis==numChasis)
                         {
-                            Console.WriteLine("Ya existe un registro con ese número de chasis, presione una tecla para continuar...");
+                            Console.WriteLine("Ya existe un registro con ese número de chasis, ["+i+"] presione una tecla para continuar...");
                             Console.ReadLine();
+                            exist = true;
                             break;
                         }
-                        else
-                        {
-                            exist = false;
-                            auto.NumChasis = numChasis;
-                        }
+                    }
+                    if (exist==false)
+                    {
+                        auto.NumChasis = numChasis;
                     }
                     
                 }
@@ -134,10 +135,9 @@ namespace Prueba_Programación_Avanzada_Rodrigo_Morales
                 {
                     Console.WriteLine("ha ingresado un valor incorrecto, presione una tecla para continuar");
                     Console.ReadLine();
-                    numChasis = 0;
                 }
                 Console.Clear();
-            } while (numChasis==0||exist==true);
+            } while (numChasis!=0&&exist==true);
             do
             {
                 Console.WriteLine("#####################################################");
@@ -326,30 +326,40 @@ namespace Prueba_Programación_Avanzada_Rodrigo_Morales
             Console.WriteLine("###############################################");
             Console.WriteLine("## Ingrese el numero de chasis a eliminar: ####");
             Console.WriteLine("###############################################\n");
-            chasis = Convert.ToInt32(Console.ReadLine());
-
-            Console.ReadLine();
-            for (int i = 0; i < listadoAutos.Count(); i++)
+            try
             {
-                if (listadoAutos[i].NumChasis == chasis)
+                chasis = Convert.ToInt32(Console.ReadLine());
+                for (int i = 0; i < listadoAutos.Count(); i++)
                 {
-                    autosEli = 1;
-                    listadoAutos.RemoveAt(i);
-                    Console.WriteLine("Auto Eliminado");
+                    if (listadoAutos[i].NumChasis == chasis)
+                    {
+                        autosEli = autosEli + 1;
+                        listadoAutos.RemoveAt(i);
+                        Console.WriteLine("Auto Eliminado");
+                        Console.WriteLine("\n\n Presione una tecla para continuar...");
+                        Console.ReadLine();
+                        Console.Clear();
+                        menu();
+                    }
+
+                }
+                if (autosEli == 0)
+                {
+                    Console.WriteLine("No se encontro un auto con ese chasis");
                     Console.WriteLine("\n\n Presione una tecla para continuar...");
                     Console.ReadLine();
                 }
-
+                Console.Clear();
+                menu();
             }
-            if (autosEli == 0)
+            catch (Exception)
             {
-                Console.WriteLine("No se encontro un auto con ese chasis");
-                Console.WriteLine("\n\n Presione una tecla para continuar...");
-                Console.ReadLine();
-            }
-            Console.Clear();
-            menu();
+                Console.WriteLine("El valor ingresado es incorrecto, presione enter para continuar");
+                Console.ReadKey();
+                Console.Clear();
+                eliminarAuto();
 
+            }
         }
 
     }
