@@ -101,6 +101,7 @@ namespace Prueba_Programación_Avanzada_Rodrigo_Morales
             int numChasis = 0;
             double cilindrada = 0;
             double precio = 0;
+            Boolean exist = true;
             Console.WriteLine("###########################################################");
             Console.WriteLine("                   INGRESO DE AUTOMÓVIL                    ");
             Console.WriteLine("###########################################################"+"\n");
@@ -113,22 +114,21 @@ namespace Prueba_Programación_Avanzada_Rodrigo_Morales
                 try
                 {
                     numChasis = int.Parse(Console.ReadLine());
-
                     for (int i = 0; i < listadoAutos.Count(); i++)
                     {
-                        if (numChasis.Equals(listadoAutos[i].NumChasis))
+                        if (listadoAutos[i].NumChasis==numChasis)
                         {
-                            Console.WriteLine("Ya existe un registro con ese número de chasis");
-                            Console.WriteLine("Presione una tecla para continuar...");
+                            Console.WriteLine("Ya existe un registro con ese número de chasis, presione una tecla para continuar...");
                             Console.ReadLine();
                             break;
                         }
                         else
                         {
+                            exist = false;
                             auto.NumChasis = numChasis;
                         }
-
                     }
+                    
                 }
                 catch (Exception)
                 {
@@ -137,7 +137,7 @@ namespace Prueba_Programación_Avanzada_Rodrigo_Morales
                     numChasis = 0;
                 }
                 Console.Clear();
-            } while (numChasis==0);
+            } while (numChasis==0||exist==true);
             do
             {
                 Console.WriteLine("#####################################################");
@@ -279,9 +279,9 @@ namespace Prueba_Programación_Avanzada_Rodrigo_Morales
                 Console.WriteLine("Cilindrada:          " + listadoAutos[i].Cilindrada);
                 Console.WriteLine("Precio:              " + listadoAutos[i].Precio);
                 Console.WriteLine("Tipo de Auto:        " + listadoAutos[i].TipoAuto);
-                if (listadoAutos[i].TipoAuto.ToUpper().Equals("SIV"))
+                if (listadoAutos[i].TipoAuto.ToUpper().Equals("SUV"))
                 {
-                    Console.WriteLine("Tracción:           " + listadoAutos[i].Traccion);
+                    Console.WriteLine("Tracción:            " + listadoAutos[i].Traccion);
                 }
                 if (listadoAutos[i].TipoAuto.ToUpper().Equals("SEDÁN"))
                 {
@@ -297,13 +297,61 @@ namespace Prueba_Programación_Avanzada_Rodrigo_Morales
         }
         private static void mostrarCantidadAutosCostosos()
         {
+            Console.WriteLine("###############################################");
+            Console.WriteLine("########### Total de autos costosos ###########");
+            Console.WriteLine("###############################################\n");
+            int CantAutosCostosos;
+            CantAutosCostosos = 0;
+            for (int i = 0; i < listadoAutos.Count(); i++)
+            {
+                if (listadoAutos[i].Precio > 15000000)
+                {
+                    CantAutosCostosos = CantAutosCostosos + 1;
+                }
+
+            }
+            Console.WriteLine("Total: " + CantAutosCostosos);
+            Console.WriteLine("\n\n Presione una tecla para continuar...");
+            Console.ReadLine();
+            Console.Clear();
+            menu();
 
         }
         private static void eliminarAuto()
         {
+            int chasis, autosEli;
+
+            chasis = 0;
+            autosEli = 0;
+            Console.WriteLine("###############################################");
+            Console.WriteLine("## Ingrese el numero de chasis a eliminar: ####");
+            Console.WriteLine("###############################################\n");
+            chasis = Convert.ToInt32(Console.ReadLine());
+
+            Console.ReadLine();
+            for (int i = 0; i < listadoAutos.Count(); i++)
+            {
+                if (listadoAutos[i].NumChasis == chasis)
+                {
+                    autosEli = 1;
+                    listadoAutos.RemoveAt(i);
+                    Console.WriteLine("Auto Eliminado");
+                    Console.WriteLine("\n\n Presione una tecla para continuar...");
+                    Console.ReadLine();
+                }
+
+            }
+            if (autosEli == 0)
+            {
+                Console.WriteLine("No se encontro un auto con ese chasis");
+                Console.WriteLine("\n\n Presione una tecla para continuar...");
+                Console.ReadLine();
+            }
+            Console.Clear();
+            menu();
 
         }
-        
+
     }
 }
 /*
